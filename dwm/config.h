@@ -1,20 +1,16 @@
+/* See LICENSE file for copyright and license details. */
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Cascadia Code:size=10","fontawesome:size=12" };
-static const char dmenufont[]       = "Cascadia Code:size=10";
-// background color
+static const char *fonts[]          = { "monospace:size=10", "fontawesome:size=13" };
+static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#0d0e15";
-//inactive window border color
-//static const char col_gray2[]       = "#bb9af7";
 static const char col_gray2[]       = "#0d0e15";
-//font color
 static const char col_gray3[]       = "#9aa5ce";
-//current tag & current window  fonts color
 static const char col_gray4[]       = "#c0caf5";
-//top bar second color(blue) and active window border color
 static const char col_cyan[]        = "#1c1f2d";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
@@ -23,31 +19,39 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = {"", "", "", "", "", ""};
+static const char *tags[] = {"", "", "", "", "", "", ""};
 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Pcmanfm",     NULL,       NULL,     1 << 0,            0,           -1 },
-	{ "Mpv",     NULL,       NULL,     1 << 0,            0,           -1 },
-	{ "Vlc",  NULL,       NULL,       1 << 0,       0,           -1 },
-	{ "Zathura",  NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "Postman",  NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "Mongodb-compass",  NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "Chromium",  NULL,       NULL,       1 << 3,       0,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 3,       0,           -1 },
-	{ "Transmission",  NULL,       NULL,       1 << 4,       0,           -1 },
-	{ "Handbrake",  NULL,       NULL,       1 << 4,       0,           -1 },
-	{ "Audacious",  NULL,       NULL,       1 << 5,       0,           -1 },
+	/* class              instance    title       tags mask     isfloating   monitor */
+	{ "Pcmanfm",           NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "Obsidian",          NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "Mpv",               NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "Vlc",               NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "Zathura",           NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "Postman",           NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "Insomnia",          NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "Beekeeper-Studio",  NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "MongoDB Compass",   NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "Chromium",          NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Firefox",           NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Brave-browser",     NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "qBittorrent",       NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "Transmission",      NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "Handbrake",         NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "Zoom",              NULL,       NULL,       1 << 5,       0,           -1 },
+	{ "Skype",             NULL,       NULL,       1 << 5,       0,           -1 },
+	{ "Audacious",         NULL,       NULL,       1 << 6,       0,           -1 },
 };
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -58,6 +62,8 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
+#define ALTKEY Mod1Mask
+#define TERMINAL "kitty"
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -67,17 +73,40 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+#include <X11/XF86keysym.h>
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+/* static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; */
+static const char *dmenucmd[] = { "dmenu_run", "-c", NULL };
 static const char *termcmd[]  = { "kitty", NULL };
+static const char *web[] = {"brave-browser", NULL};
+static const char *files[] = {"pcmanfm", NULL};
+static const char *music[] = {"audacious", NULL};
+
+static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
+static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
+
+/* static const char *light_up[] = {"/usr/bin/brightnessctl", "set", "+5", NULL}; */
+/* static const char *light_down[] = {"/usr/bin/brightnessctl", "set", "5-", NULL}; */
+/* static const char *light_up[] = {"/usr/bin/light", "-A", "5", NULL}; */
+/* static const char *light_down1[] = {"/usr/bin/light", "-U", "5", NULL}; */
+static const char *out[] = { "/home/tawargy/scripts/exit.sh", NULL };
 
 #include "movestack.c"
-#include "shiftview.c"
-static Key keys[] = {
+
+static const Key keys[] = {
 	/* modifier                     key        function        argument */
+
+	{ ALTKEY,                       XK_9,      spawn,          SHCMD("light -A 5") },
+	{ ALTKEY,                       XK_0,      spawn,          SHCMD("light -U 5") },
+	{ ALTKEY,                       XK_p,      spawn,          SHCMD("mpv $(xclip -o)") },
+	{ ALTKEY,                       XK_w,      spawn,          {.v = web } },
+	{ ALTKEY,                       XK_f,      spawn,          {.v = files } },
+	{ ALTKEY,                       XK_m,      spawn,          {.v = music } },
+	{ MODKEY|ShiftMask,             XK_i,      spawn,          SHCMD(TERMINAL " -e nmtui") },
+	{ MODKEY,                       XK_r,      spawn,          SHCMD("rofi -show drun") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -86,10 +115,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
   { MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
-   { MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
+  { MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	{ MODKEY,                       XK_x,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -101,8 +130,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-  { MODKEY,                       XK_n,      shiftview,      {.i = +1 } },
-	{ MODKEY,                       XK_b,      shiftview,      {.i = -1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -113,11 +140,18 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+  { MODKEY,                       XK_q,      spawn,          {.v = out } },
+  { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
+	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+  /* { 0,                            XF86XK_MonBrightnessUp,  spawn, {.v = light_up2} }, */
+	/* { 0,                            XF86XK_MonBrightnessDown, spawn, {.v = light_down2} }, */
 };
+
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
-static Button buttons[] = {
+static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
