@@ -45,6 +45,7 @@ static const Rule rules[] = {
 	{ "Zoom",              NULL,       NULL,       1 << 5,       0,           -1 },
 	{ "Skype",             NULL,       NULL,       1 << 5,       0,           -1 },
 	{ "Audacious",         NULL,       NULL,       1 << 6,       0,           -1 },
+	{ "Spotify",           NULL,       NULL,       1 << 6,       0,           -1 },
 };
 
 /* layout(s) */
@@ -91,6 +92,8 @@ static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "togg
 /* static const char *light_up[] = {"/usr/bin/light", "-A", "5", NULL}; */
 /* static const char *light_down1[] = {"/usr/bin/light", "-U", "5", NULL}; */
 static const char *out[] = { "/home/tawargy/scripts/exit.sh", NULL };
+static const char *keyToggle[] = { "/home/tawargy/scripts/key-layout-toggle.sh", NULL };
+/* static const char *moazin[] = { "/home/tawargy/scripts/moazin/moazin.sh", NULL }; */
 
 #include "movestack.c"
 
@@ -103,6 +106,10 @@ static const Key keys[] = {
 	{ ALTKEY,                       XK_w,      spawn,          {.v = web } },
 	{ ALTKEY,                       XK_f,      spawn,          {.v = files } },
 	{ ALTKEY,                       XK_m,      spawn,          {.v = music } },
+	{ ALTKEY|ShiftMask,             XK_Return, spawn,          {.v = keyToggle } },
+	/* { ALTKEY,                       XK_z,      spawn,          {.v = moazin} }, */
+	{ ALTKEY,                       XK_z,      spawn,          SHCMD("python3 /home/tawargy/scripts/moazin/moazin.py") },
+
 	{ MODKEY|ShiftMask,             XK_i,      spawn,          SHCMD(TERMINAL " -e nmtui") },
 	{ MODKEY,                       XK_r,      spawn,          SHCMD("rofi -show drun") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
