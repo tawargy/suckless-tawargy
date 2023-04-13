@@ -71,7 +71,8 @@ static const struct arg args[] = {
      {wifi_essid,    " %s | ", "wlp2s0"},
      {run_command,   " %s | ", "amixer sget Master | awk -F\"[][]\" '/%/ { print $2 }' | head -n1" },
      {keymap,        "%s | ",NULL},
-     {battery_state, "%s","BAT1"},
-     {battery_perc,  "%s% | ", "BAT1"},
+     /* {battery_state, "%s","BAT1"}, */
+     /* {battery_perc,  "%s% | ", "BAT1"}, */
+     {run_command, "%s | ", "~/scripts/battery.sh"},
      {datetime,      "%s",              "%a %d %B  %I:%M %p"},
 };

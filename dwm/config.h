@@ -111,6 +111,8 @@ static const Key keys[] = {
 	{ ALTKEY,                       XK_z,      spawn,          SHCMD("python3 /home/tawargy/scripts/moazin/moazin.py") },
 
 	{ MODKEY|ShiftMask,             XK_i,      spawn,          SHCMD(TERMINAL " -e nmtui") },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("pavucontrol") },
+	{ MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("arandr") },
 	{ MODKEY,                       XK_r,      spawn,          SHCMD("rofi -show drun") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
