@@ -73,6 +73,6 @@ static const struct arg args[] = {
      {keymap,        "%s | ",NULL},
      /* {battery_state, "%s","BAT1"}, */
      /* {battery_perc,  "%s% | ", "BAT1"}, */
-     {run_command, "%s | ", "~/scripts/battery.sh"},
+     {run_command, "%s | ", "~/scripts/dwm/slstatus/battery.sh"},
      {datetime,      "%s",              "%a %d %B  %I:%M %p"},
 };

@@ -19,7 +19,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = {"", "", "", "", "", "", ""};
+static const char *tags[] = {"", "", "", "", "","", "", "",""};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -28,24 +28,23 @@ static const Rule rules[] = {
 	 */
 	/* class              instance    title       tags mask     isfloating   monitor */
 	{ "Pcmanfm",           NULL,       NULL,       1 << 0,       0,           -1 },
-	{ "Obsidian",          NULL,       NULL,       1 << 0,       0,           -1 },
 	{ "Mpv",               NULL,       NULL,       1 << 0,       0,           -1 },
 	{ "Vlc",               NULL,       NULL,       1 << 0,       0,           -1 },
-	{ "Zathura",           NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "Postman",           NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "Insomnia",          NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "Beekeeper-Studio",  NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "MongoDB Compass",   NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "Chromium",          NULL,       NULL,       1 << 3,       0,           -1 },
-	{ "Firefox",           NULL,       NULL,       1 << 3,       0,           -1 },
-	{ "Brave-browser",     NULL,       NULL,       1 << 3,       0,           -1 },
-	{ "qBittorrent",       NULL,       NULL,       1 << 4,       0,           -1 },
-	{ "Transmission",      NULL,       NULL,       1 << 4,       0,           -1 },
-	{ "Handbrake",         NULL,       NULL,       1 << 4,       0,           -1 },
-	{ "Zoom",              NULL,       NULL,       1 << 5,       0,           -1 },
-	{ "Skype",             NULL,       NULL,       1 << 5,       0,           -1 },
-	{ "Audacious",         NULL,       NULL,       1 << 6,       0,           -1 },
-	{ "Spotify",           NULL,       NULL,       1 << 6,       0,           -1 },
+	{ "Zathura",           NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Postman",           NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Insomnia",          NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Beekeeper-Studio",  NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "MongoDB Compass",   NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Chromium",          NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "Firefox",           NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "Brave-browser",     NULL,       NULL,       1 << 4,       0,           -1 },
+    { "Obsidian",          NULL,       NULL,       1 << 5,       0,           -1 },
+	{ "Handbrake",         NULL,       NULL,       1 << 6,       0,           -1 },
+	{ "Zoom",              NULL,       NULL,       1 << 6,       0,           -1 },
+	{ "Skype",             NULL,       NULL,       1 << 6,       0,           -1 },
+	{ "Audacious",         NULL,       NULL,       1 << 7,       0,           -1 },
+	{ "Spotify",           NULL,       NULL,       1 << 7,       0,           -1 },
+    { "qBittorrent",       NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -91,8 +90,8 @@ static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "togg
 /* static const char *light_down[] = {"/usr/bin/brightnessctl", "set", "5-", NULL}; */
 /* static const char *light_up[] = {"/usr/bin/light", "-A", "5", NULL}; */
 /* static const char *light_down1[] = {"/usr/bin/light", "-U", "5", NULL}; */
-static const char *out[] = { "/home/tawargy/scripts/exit.sh", NULL };
-static const char *keyToggle[] = { "/home/tawargy/scripts/key-layout-toggle.sh", NULL };
+static const char *out[] = { "/home/tawargy/scripts/dwm/exit.sh", NULL };
+static const char *keyToggle[] = { "/home/tawargy/scripts/dwm/key-layout-toggle.sh", NULL };
 /* static const char *moazin[] = { "/home/tawargy/scripts/moazin/moazin.sh", NULL }; */
 
 #include "movestack.c"
