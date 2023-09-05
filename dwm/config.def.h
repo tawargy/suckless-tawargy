@@ -33,18 +33,19 @@ static const Rule rules[] = {
 	{ "Zathura",           NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Postman",           NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Insomnia",          NULL,       NULL,       1 << 3,       0,           -1 },
-	{ "Beekeeper-Studio",  NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "beekeeper-studio",  NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "MongoDB Compass",   NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Chromium",          NULL,       NULL,       1 << 4,       0,           -1 },
 	{ "Firefox",           NULL,       NULL,       1 << 4,       0,           -1 },
 	{ "Brave-browser",     NULL,       NULL,       1 << 4,       0,           -1 },
-    { "Obsidian",          NULL,       NULL,       1 << 5,       0,           -1 },
+  { "obsidian",          NULL,       NULL,       1 << 5,       0,           -1 },
+  { "KeePassXC",         NULL,       NULL,       1 << 5,       0,           -1 },
 	{ "Handbrake",         NULL,       NULL,       1 << 6,       0,           -1 },
 	{ "Zoom",              NULL,       NULL,       1 << 6,       0,           -1 },
 	{ "Skype",             NULL,       NULL,       1 << 6,       0,           -1 },
 	{ "Audacious",         NULL,       NULL,       1 << 7,       0,           -1 },
 	{ "Spotify",           NULL,       NULL,       1 << 7,       0,           -1 },
-    { "qBittorrent",       NULL,       NULL,       1 << 8,       0,           -1 },
+  { "qBittorrent",       NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -78,41 +79,15 @@ static const Layout layouts[] = {
 /* static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; */
 static const char *dmenucmd[] = { "dmenu_run", "-c", NULL };
 static const char *termcmd[]  = { "kitty", NULL };
-static const char *web[] = {"brave-browser", NULL};
-static const char *files[] = {"pcmanfm", NULL};
-static const char *music[] = {"audacious", NULL};
 
-static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
-static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
-static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
-
-/* static const char *light_up[] = {"/usr/bin/brightnessctl", "set", "+5", NULL}; */
-/* static const char *light_down[] = {"/usr/bin/brightnessctl", "set", "5-", NULL}; */
-/* static const char *light_up[] = {"/usr/bin/light", "-A", "5", NULL}; */
-/* static const char *light_down1[] = {"/usr/bin/light", "-U", "5", NULL}; */
-static const char *out[] = { "/home/tawargy/scripts/dwm/exit.sh", NULL };
-static const char *keyToggle[] = { "/home/tawargy/scripts/dwm/key-layout-toggle.sh", NULL };
-/* static const char *moazin[] = { "/home/tawargy/scripts/moazin/moazin.sh", NULL }; */
 
 #include "movestack.c"
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 
-	{ ALTKEY,                       XK_9,      spawn,          SHCMD("light -A 5") },
-	{ ALTKEY,                       XK_0,      spawn,          SHCMD("light -U 5") },
-	{ ALTKEY,                       XK_p,      spawn,          SHCMD("mpv $(xclip -o)") },
-	{ ALTKEY,                       XK_w,      spawn,          {.v = web } },
-	{ ALTKEY,                       XK_f,      spawn,          {.v = files } },
-	{ ALTKEY,                       XK_m,      spawn,          {.v = music } },
-	{ ALTKEY|ShiftMask,             XK_Return, spawn,          {.v = keyToggle } },
-	/* { ALTKEY,                       XK_z,      spawn,          {.v = moazin} }, */
-	{ ALTKEY,                       XK_z,      spawn,          SHCMD("python3 /home/tawargy/scripts/moazin/moazin.py") },
 
-	{ MODKEY|ShiftMask,             XK_i,      spawn,          SHCMD(TERMINAL " -e nmtui") },
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("pavucontrol") },
-	{ MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("arandr") },
-	{ MODKEY,                       XK_r,      spawn,          SHCMD("rofi -show drun") },
+
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -148,12 +123,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-  { MODKEY,                       XK_q,      spawn,          {.v = out } },
-  { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
-	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
-	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
-  /* { 0,                            XF86XK_MonBrightnessUp,  spawn, {.v = light_up2} }, */
-	/* { 0,                            XF86XK_MonBrightnessDown, spawn, {.v = light_down2} }, */
+
 };
 
 
