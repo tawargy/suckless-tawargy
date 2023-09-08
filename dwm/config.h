@@ -19,7 +19,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = {"", "", "", "", "","", "", "",""};
+static const char *tags[] = {"", "", "", "", "","", "", "",""};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -81,46 +81,28 @@ static const char *dmenucmd[] = { "dmenu_run", "-c", NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 
 
-/* static const char *volUp[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL }; */
-/* static const char *volDown[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL }; */
-/* static const char *volMute[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL }; */
-
-
-/* static const char *out[] = { "/home/tawargy/scripts/dwm/exit.sh", NULL }; */
-
-
 #include "movestack.c"
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-
-
-	/* { ALTKEY,                       XK_1,      spawn,          SHCMD("light -U 5") }, */
-	/* { ALTKEY,                       XK_2,      spawn,          SHCMD("light -A 5") }, */
-  /* { ALTKEY,                       XK_=,      spawn,          {.v = volDown } }, */
-	/* { ALTKEY,                       XK_0,      spawn,          {.v = volMute } }, */
-	/* { ALTKEY,                       XK_-,      spawn,          {.v = volUp   } }, */
+ 
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+  { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
   { MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
   { MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,                       XK_x,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
@@ -134,15 +116,9 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-  /* { MODKEY,                       XK_q,      spawn,          {.v = out } }, */
+	{ MODKEY|ShiftMask|ControlMask,             XK_q,      quit,           {0} },
 
-  /* { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } }, */
-	/* { 0,                            XF86XK_AudioMute,        spawn, {.v = mutevol } }, */
-	/* { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } }, */
 
-  /* { 0,                            XF86XK_MonBrightnessUp,  spawn, {.v = light_up2} }, */
-	/* { 0,                            XF86XK_MonBrightnessDown, spawn, {.v = light_down2} }, */
 };
 
 
