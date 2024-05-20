@@ -6,7 +6,8 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 //static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-static char *font = "JetBrainsMono Nerd Font:pixelsize=16:antialias=true:autohint=true";
+static char *font = "Dank Mono:pixelsize=18:antialias=true:autohint=true";
+/*static char *font = "JetBrainsMono Nerd Font:pixelsize=16:antialias=true:autohint=true";*/
 /* Spare fonts */
 static char *font2[] = {
  "NotoColorEmoji:pixelsize=16:antialias=true:autohint=true", 
@@ -130,8 +131,8 @@ static const char *colorname[] = {
 	/* more colors can be added after 255 to use with DefaultXX */
 	"#cccccc",
 	"#555555",
-	"gray90", /* default foreground colour */
-	"black", /* default background colour */
+	"#DCD7BA", /* default foreground colour */
+	"#1F1F28", /* default background colour */
 };
 
 

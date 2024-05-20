@@ -73,6 +73,6 @@ static const struct arg args[] = {
      {wifi_essid,    "^c#d2b1ea^ %s |", "wlp2s0"},
      {run_command,   "^c#d2b1ea^ %s |", "amixer sget Master | awk -F\"[][]\" '/%/ { print $2 }' | head -n1" },
      {keymap,        "^c#d2b1ea^%s |",NULL},
-     {run_command,   "%s |", "~/bin/battery_indicator.sh"},
+     {run_command,   "%s |", "~/bin/slstatus/battery_indicator.sh"},
      {datetime,      "^c#d2b1ea^%s",              "%a %d %B  %I:%M %p"},
 };
